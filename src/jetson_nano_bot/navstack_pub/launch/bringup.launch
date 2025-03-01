@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="open_rviz" default="false"/>
+  <arg name="move_forward_only" default="false"/>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="world_name" value="$(find navstack_pub)/world/nhakho1.world"/>
+      <arg name="paused" value="false"/>
+      <arg name="use_sim_time" value="true"/>
+      <arg name="gui" value="true"/>
+      <arg name="recording" value="false"/>
+      <arg name="debug" value="false"/>
+    </include>
+    <param name="robot_description" command="$(find xacro)/xacro '$(find mobile_manipulator_body)/urdf/robot_base.urdf.xacro'"/>
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"  args="-urdf -model robot_base -param robot_description"  />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" > </node>
+    <!-- Turtlebot3 -->
+    <!-- rviz -->
+    <group if="$(arg open_rviz)">
+      <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find navstack_pub)/rviz/nav_stack.rviz"/>
+    </group>
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />
+    <node pkg="robot_pose_publisher" type="robot_pose_publisher" name="robot_pose_publisher" />
+    <node pkg="tf2_web_republisher" type="tf2_web_republisher" name="tf2_web_republisher"/>
+</launch>

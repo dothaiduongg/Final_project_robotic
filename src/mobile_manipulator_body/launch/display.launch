@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Load URDF từ file Xacro -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find mobile_manipulator_body)/urdf/robot_base.urdf.xacro'"/>
+
+  <!-- Chạy Gazebo -->
+  <arg name="world_file" default="$(find mobile_manipulator_body)/worlds/empty.world" />
+  <node name="gazebo" pkg="gazebo_ros" type="gazebo" args="-s libgazebo_ros_factory.so $(arg world_file)" output="screen" />
+
+  <!-- Spawn Robot vào Gazebo -->
+  <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot_base" output="screen" />
+  <rosparam command="load" file="$(find mobile_manipulator_body)/config/control.yaml" />
+
+  <!-- Rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find mobile_manipulator_body)/urdf.rviz" required="true" />
+
+
+  <!-- Joint State Publisher -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
+    <param name="use_gui" value="false"/>
+  </node>
+  <!-- Robot State Publisher -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" />
+
+  <!-- Controller Spawner -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" args="robot_base_joint_publisher robot_base_velocity_controller" />
+
+  <!-- Keyboard Teleop -->
+  <!-- <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen" /> -->
+</launch>

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="robot_base">
+  <link name="dummy_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.001"/>
+        <!-- Small dummy geometry -->
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 0" />
+        <!-- Transparent -->
+      </material>
+    </visual>
+  </link>
+  <!-- Connect dummy_link to base_link -->
+  <joint name="base_to_dummy" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="dummy_link" />
+    <child link="base_link" />
+  </joint>
+  <link name="base_link">
+    <inertial>
+      <origin xyz="-0.0159332 0.00037847 0.0230631" rpy="0 0 0" />
+      <mass value="0.292247405722798" />
+      <inertia
+        ixx="0.000429963078507304" ixy="4.62099453471662E-06"
+        ixz="1.58774627973234E-12" iyy="0.00080367575600521"
+        iyz="-3.33005853023011E-13" izz="0.00121846146781167" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://mobile_manipulator_body/meshes/base_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://mobile_manipulator_body/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="Wheel_Left">
+    <inertial>
+      <origin
+        xyz="-4.9865970597196E-07 -5.89849896204253E-07 -0.00606538909070078"
+        rpy="0 0 0" />
+      <mass
+        value="0.095010558221634" />
+      <inertia
+        ixx="5.98197604162753E-05"
+        ixy="-2.19638833914417E-10"
+        ixz="2.6590553874291E-12"
+        iyy="5.98250644048601E-05"
+        iyz="-6.89645347104026E-11"
+        izz="0.000107921224901709" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_manipulator_body/meshes/Wheel_Left.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_manipulator_body/meshes/Wheel_Left.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Wheel_Left_joint" type="continuous">
+    <origin xyz="-0.0691182674073111 0.0986067938627333 0.0147500406739957"
+      rpy="-1.57079632679489 0 0" />
+    <parent link="base_link" />
+    <child link="Wheel_Left" />
+    <axis xyz="-0.000221070416805364 0 0.999999975563903" />
+  </joint>
+  <link
+    name="Wheel_Right">
+    <inertial>
+      <origin
+        xyz="-7.5125333422188E-07 -1.43630067065553E-07 0.00606538909071514"
+        rpy="0 0 0" />
+      <mass
+        value="0.0950105582252051" />
+      <inertia
+        ixx="5.98235592551786E-05"
+        ixy="-2.40126304111027E-09"
+        ixz="5.84800461053403E-11"
+        iyy="5.98212655663013E-05"
+        iyz="-3.66504977655556E-11"
+        izz="0.000107921224902043" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_manipulator_body/meshes/Wheel_Right.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_manipulator_body/meshes/Wheel_Right.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Wheel_Right_joint"
+    type="continuous">
+    <origin
+      xyz="-0.0690746739058167 -0.098585939150258 0.0147500004436891"
+      rpy="-1.57079632679489 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Wheel_Right" />
+    <axis
+      xyz="-0.000221070416805647 0 0.999999975563903" />
+  </joint>
+  <link
+    name="CASTER">
+    <inertial>
+      <origin
+        xyz="1.88150478530602E-09 1.4854297777922E-08 0.010130285754726"
+        rpy="0 0 0" />
+      <mass
+        value="0.0118320440750591" />
+      <inertia
+        ixx="7.75664356920457E-07"
+        ixy="1.72527856620683E-12"
+        ixz="-1.28248756008223E-13"
+        iyy="7.25304291699545E-07"
+        iyz="-6.26130230081244E-13"
+        izz="9.21150248298891E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_manipulator_body/meshes/CASTER.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.796078431372549 0.796078431372549 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_manipulator_body/meshes/CASTER.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="CASTER_joint"
+    type="fixed">
+    <origin
+      xyz="0.0759035293244633 1.04273562376855E-05 -0.0299999999999997"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="CASTER" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Lidar">
+    <inertial>
+      <origin
+        xyz="-0.000952743015547569 0.000174931117582391 -0.0222148342073064"
+        rpy="0 0 0" />
+      <mass
+        value="0.163065240500782" />
+      <inertia
+        ixx="6.07653762014296E-05"
+        ixy="-2.85075017809212E-08"
+        ixz="-2.36607526592323E-07"
+        iyy="6.03982532986614E-05"
+        iyz="4.61829628674481E-08"
+        izz="0.000107588752845482" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_manipulator_body/meshes/Lidar.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_manipulator_body/meshes/Lidar.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Lidar_joint"
+    type="fixed">
+    <origin
+      xyz="0.0659038792794608 1.07773112351106E-05 0.134299800000001"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Lidar" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+      <controlPeriod>0.001</controlPeriod>
+      <legacyModeNS>false</legacyModeNS>
+    </plugin>
+  </gazebo>
+  <gazebo>
+    <plugin name="diff_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <robotNamespace>/</robotNamespace>
+      <legacyMode>false</legacyMode>
+      <alwaysOn>true</alwaysOn>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>map</odometryFrame>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <wheelSeparation>0.2</wheelSeparation>
+      <!-- Khoảng cách giữa hai bánh xe trái và phải -->
+      <wheelDiameter>0.15</wheelDiameter>
+      <!-- Đường kính bánh xe -->
+      <updateRate>100.0</updateRate>
+      <leftJoint>Wheel_Left_joint</leftJoint>
+      <rightJoint>Wheel_Right_joint</rightJoint>
+      <wheelTorque>10</wheelTorque>
+      <publishTf>1</publishTf>
+      <wheelAcceleration>2.8</wheelAcceleration>
+      <publishWheelJointState>true</publishWheelJointState>
+      <publishWheelTF>false</publishWheelTF>
+      <odometrySource>world</odometrySource>
+      <rosDebugLevel>Debug</rosDebugLevel>
+      <torque>5.0</torque>
+    </plugin>
+  </gazebo>
+  <!-- Thêm các thuộc tính ma sát và trọng lực cho các bánh xe -->
+  <gazebo reference="Wheel_Left">
+    <mu1 value="0.9"/>
+    <mu2 value="0.9"/>
+    <kp value="100000.0" />
+    <kd value="1.0" />
+    <fdir1 value="1 0 0"/>
+  </gazebo>
+  <gazebo reference="Wheel_Right">
+    <mu1 value="0.9"/>
+    <mu2 value="0.9"/>
+    <kp value="100000.0" />
+    <kd value="1.0" />
+    <fdir1 value="1 0 0"/>
+  </gazebo>
+  <transmission name="front_right_wheel_trans" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="front_right_wheel_motor">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="Wheel_Right_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <transmission name="rear_left_wheel_trans" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="rear_left_wheel_motor">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="Wheel_Left_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+</robot>

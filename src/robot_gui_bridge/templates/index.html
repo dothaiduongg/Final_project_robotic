@@ -1,0 +1,231 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/nipplejs/0.7.3/nipplejs.js"></script>
+
+    <script type="text/javascript" type="text/javascript">
+
+
+        var ros = new ROSLIB.Ros({
+            url: 'ws://localhost:9090'
+        });
+
+
+
+        ros.on('connection', function () {
+            document.getElementById("status").innerHTML = "Connected";
+        });
+
+        ros.on('error', function (error) {
+            document.getElementById("status").innerHTML = "Error";
+        });
+
+        ros.on('close', function () {
+            document.getElementById("status").innerHTML = "Closed";
+        });
+
+
+
+
+        var txt_listener = new ROSLIB.Topic({
+            ros: ros,
+            name: '/txt_msg',
+            messageType: 'std_msgs/String'
+        });
+
+        txt_listener.subscribe(function (m) {
+            document.getElementById("msg").innerHTML = m.data;
+            move(1, 0);
+        });
+
+        cmd_vel_listener = new ROSLIB.Topic({
+            ros: ros,
+            name: "/cmd_vel",
+            messageType: 'geometry_msgs/Twist'
+        });
+
+        move = function (linear, angular) {
+            var twist = new ROSLIB.Message({
+                linear: {
+                    x: linear,
+                    y: 0,
+                    z: 0
+                },
+                angular: {
+                    x: 0,
+                    y: 0,
+                    z: angular
+                }
+            });
+            cmd_vel_listener.publish(twist);
+        }
+
+
+
+
+        createJoystick = function () {
+            var options = {
+                zone: document.getElementById('zone_joystick'),
+                threshold: 0.1,
+                position: { left: 50 + '%' },
+                mode: 'static',
+                size: 150,
+                color: '#000000',
+            };
+            manager = nipplejs.create(options);
+
+            linear_speed = 0;
+            angular_speed = 0;
+
+            manager.on('start', function (event, nipple) {
+                timer = setInterval(function () {
+                    move(linear_speed, angular_speed);
+                }, 25);
+            });
+
+            manager.on('move', function (event, nipple) {
+                max_linear = 5.0; // m/s
+                max_angular = 2.0; // rad/s
+                max_distance = 75.0; // pixels;
+                linear_speed = Math.sin(nipple.angle.radian) * max_linear * nipple.distance / max_distance;
+                angular_speed = -Math.cos(nipple.angle.radian) * max_angular * nipple.distance / max_distance;
+            });
+
+            manager.on('end', function () {
+                if (timer) {
+                    clearInterval(timer);
+                }
+                self.move(0, 0);
+            });
+        }
+        window.onload = function () {
+            createJoystick();
+        }
+
+    </script>
+</head>
+
+<body>
+    <h1>Simple ROS User Interface</h1>
+    <p>Connection status: <span id="status"></span></p>
+    <p>Last message on /txt_msg: <span id="msg"></span></p>
+    <div id="zone_joystick" style="position: relative;"></div>
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/eventemitter2@6.4.9/lib/eventemitter2.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/roslib@1/build/roslib.min.js"></script>
+
+<script type="text/javascript" type="text/javascript">
+  // Connecting to ROS
+  // -----------------
+
+  var ros = new ROSLIB.Ros({
+    url : 'ws://localhost:9090'
+  });
+
+  ros.on('connection', function() {
+    console.log('Connected to websocket server.');
+  });
+
+  ros.on('error', function(error) {
+    console.log('Error connecting to websocket server: ', error);
+  });
+
+  ros.on('close', function() {
+    console.log('Connection to websocket server closed.');
+  });
+
+  // Publishing a Topic
+  // ------------------
+
+  var cmdVel = new ROSLIB.Topic({
+    ros : ros,
+    name : '/cmd_vel',
+    messageType : 'geometry_msgs/Twist'
+  });
+
+  var twist = new ROSLIB.Message({
+    linear : {
+      x : 0.1,
+      y : 0.2,
+      z : 0.3
+    },
+    angular : {
+      x : -0.1,
+      y : -0.2,
+      z : -0.3
+    }
+  });
+  cmdVel.publish(twist);
+
+  // Subscribing to a Topic
+  // ----------------------
+
+  var listener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/listener',
+    messageType : 'std_msgs/String'
+  });
+
+  listener.subscribe(function(message) {
+    console.log('Received message on ' + listener.name + ': ' + message.data);
+    listener.unsubscribe();
+  });
+
+  // Calling a service
+  // -----------------
+
+  var addTwoIntsClient = new ROSLIB.Service({
+    ros : ros,
+    name : '/add_two_ints',
+    serviceType : 'rospy_tutorials/AddTwoInts'
+  });
+
+  var request = new ROSLIB.ServiceRequest({
+    a : 1,
+    b : 2
+  });
+
+  addTwoIntsClient.callService(request, function(result) {
+    console.log('Result for service call on '
+      + addTwoIntsClient.name
+      + ': '
+      + result.sum);
+  });
+
+  // Getting and setting a param value
+  // ---------------------------------
+
+  ros.getParams(function(params) {
+    console.log(params);
+  });
+
+  var maxVelX = new ROSLIB.Param({
+    ros : ros,
+    name : 'max_vel_y'
+  });
+
+  maxVelX.set(0.8);
+  maxVelX.get(function(value) {
+    console.log('MAX VAL: ' + value);
+  });
+</script>
+</head>
+
+<body>
+  <h1>Simple roslib Example</h1>
+  <p>Check your Web Console for output.</p>
+</body>
+</html>

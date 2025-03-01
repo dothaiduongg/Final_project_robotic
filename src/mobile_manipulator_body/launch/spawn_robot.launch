@@ -1,0 +1,8 @@
+<launch>
+    <!-- Nạp thông tin URDF từ file .xacro -->
+    <param name="robot_description" command="$(find xacro)/xacro '$(find mobile_manipulator_body)/urdf/mobile_robot.xacro'"/>
+    <!-- Khởi động Gazebo -->
+    <node name="gazebo" pkg="gazebo_ros" type="gazebo" args="-world $(find gazebo_ros)/worlds/empty.world" output="screen" />
+    <!-- Spawn robot trong Gazebo -->
+    <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model mobile_robot" output="screen" />
+</launch>
