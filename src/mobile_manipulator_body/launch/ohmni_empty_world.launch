@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.1"/>
+  <arg name="yaw" default="0.0"/>
+  <!-- <arg name="scenario" default="empty"/> -->
+  <!-- <arg name="robot_ns" default="tb_sim"/> -->
+  <!-- <arg name="use_external_controller" default="false"/> -->
+  <!-- <arg name="use_joystick" default="false"/> -->
+  <!-- <arg name="enable_rviz" default="true"/> -->
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find navstack_pub)/world/nhakho1.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="recording" value="false"/>
+    <!-- <arg name="headless" value="false"/> -->
+    <arg name="debug" value="false"/>
+  </include>
+
+  <param
+    name="robot_description"
+    command="$(find xacro)/xacro '$(find mobile_manipulator_body)/urdf/tb_sim.urdf.xacro'" />
+  <node
+    name="spawn_urdf"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    output="screen"
+    args="
+          -param robot_description
+          -x $(arg x)
+          -y $(arg y)
+          -z $(arg z)
+          -Y $(arg yaw) 
+          -urdf
+          -model tb_sim
+          "/>
+
+    <node
+    name="joint_state_publisher"
+    pkg="joint_state_publisher"
+    type="joint_state_publisher" />
+  <node
+    name="robot_state_publisher"
+    pkg="robot_state_publisher"
+    type="robot_state_publisher" />
+
+  <node 
+    pkg="tf2_web_republisher" 
+    type="tf2_web_republisher" 
+    name="tf2_web_republisher"/>
+
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="fake_map"
+    args="0.0 0.0  0.0 0 0 0 map odom" />
+</launch>

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="laser_range_sensor">
+  <xacro:macro name="laser_range_sensor" params="prefix:=laser_range  parent_link:=base_link *origin">
+    <xacro:property name="M_PI" value="3.14159"/>
+    <xacro:property name="mesh_path" value="package://mobile_manipulator_body/meshes/" />
+
+    <!-- urdf format -->
+    <link name="${prefix}_link">
+      <visual>
+        <geometry>
+          <mesh filename="${mesh_path}Lidar.STL" />
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.01 0.01 0.01"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.01"/>
+        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+      </inertial>
+    </link>
+
+    <joint name="${prefix}_mount_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent_link}"/>
+      <child link="${prefix}_link"/>
+    </joint>
+
+    <gazebo reference="${prefix}_link">
+      <material>Gazebo/Red</material>
+      <sensor type="ray" name="laser_range_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>true</visualize>
+        <update_rate>10</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>360</samples>
+              <min_angle>-3.14</min_angle>
+              <max_angle>3.14</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.3</min>
+            <max>12</max>
+          </range>
+
+        </ray>
+        <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+          <robotNamespace></robotNamespace>
+          <topicName>scan</topicName>
+          <frameName>${prefix}_link</frameName>
+        </plugin>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+      </sensor>
+    </gazebo>
+
+  </xacro:macro>
+</robot>

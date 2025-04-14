@@ -68,6 +68,18 @@ install/strip/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -80,17 +92,6 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
@@ -101,18 +102,6 @@ test:
 test/fast: test
 
 .PHONY : test/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -134,6 +123,17 @@ list_install_components:
 list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -303,94 +303,19 @@ gazebo_ros_template/fast:
 .PHONY : gazebo_ros_template/fast
 
 # Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_range.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_range.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_range.dir/rule
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/vision_reconfigure.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/vision_reconfigure.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/vision_reconfigure.dir/rule
 
 # Convenience name for target.
-gazebo_ros_range: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_range.dir/rule
+vision_reconfigure: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/vision_reconfigure.dir/rule
 
-.PHONY : gazebo_ros_range
+.PHONY : vision_reconfigure
 
 # fast build rule for target.
-gazebo_ros_range/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_range.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_range.dir/build
-.PHONY : gazebo_ros_range/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_video.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_video.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_video.dir/rule
-
-# Convenience name for target.
-gazebo_ros_video: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_video.dir/rule
-
-.PHONY : gazebo_ros_video
-
-# fast build rule for target.
-gazebo_ros_video/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_video.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_video.dir/build
-.PHONY : gazebo_ros_video/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_skid_steer_drive.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_skid_steer_drive.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_skid_steer_drive.dir/rule
-
-# Convenience name for target.
-gazebo_ros_skid_steer_drive: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_skid_steer_drive.dir/rule
-
-.PHONY : gazebo_ros_skid_steer_drive
-
-# fast build rule for target.
-gazebo_ros_skid_steer_drive/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_skid_steer_drive.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_skid_steer_drive.dir/build
-.PHONY : gazebo_ros_skid_steer_drive/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_ft_sensor.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_ft_sensor.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_ft_sensor.dir/rule
-
-# Convenience name for target.
-gazebo_ros_ft_sensor: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_ft_sensor.dir/rule
-
-.PHONY : gazebo_ros_ft_sensor
-
-# fast build rule for target.
-gazebo_ros_ft_sensor/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_ft_sensor.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_ft_sensor.dir/build
-.PHONY : gazebo_ros_ft_sensor/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_diff_drive.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_diff_drive.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_diff_drive.dir/rule
-
-# Convenience name for target.
-gazebo_ros_diff_drive: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_diff_drive.dir/rule
-
-.PHONY : gazebo_ros_diff_drive
-
-# fast build rule for target.
-gazebo_ros_diff_drive/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_diff_drive.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_diff_drive.dir/build
-.PHONY : gazebo_ros_diff_drive/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_joint_pose_trajectory.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_joint_pose_trajectory.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_joint_pose_trajectory.dir/rule
-
-# Convenience name for target.
-gazebo_ros_joint_pose_trajectory: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_joint_pose_trajectory.dir/rule
-
-.PHONY : gazebo_ros_joint_pose_trajectory
-
-# fast build rule for target.
-gazebo_ros_joint_pose_trajectory/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_joint_pose_trajectory.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_joint_pose_trajectory.dir/build
-.PHONY : gazebo_ros_joint_pose_trajectory/fast
+vision_reconfigure/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/vision_reconfigure.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/vision_reconfigure.dir/build
+.PHONY : vision_reconfigure/fast
 
 # Convenience name for target.
 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/run_tests_gazebo_plugins.dir/rule:
@@ -423,36 +348,6 @@ diagnostic_msgs_generate_messages_nodejs/fast:
 .PHONY : diagnostic_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_planar_move.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_planar_move.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_planar_move.dir/rule
-
-# Convenience name for target.
-gazebo_ros_planar_move: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_planar_move.dir/rule
-
-.PHONY : gazebo_ros_planar_move
-
-# fast build rule for target.
-gazebo_ros_planar_move/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_planar_move.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_planar_move.dir/build
-.PHONY : gazebo_ros_planar_move/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-diagnostic_msgs_generate_messages_eus: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/rule
-
-.PHONY : diagnostic_msgs_generate_messages_eus
-
-# fast build rule for target.
-diagnostic_msgs_generate_messages_eus/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/build
-.PHONY : diagnostic_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_harness.dir/rule:
 	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_harness.dir/rule
 .PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_harness.dir/rule
@@ -483,259 +378,19 @@ gazebo_ros_bumper/fast:
 .PHONY : gazebo_ros_bumper/fast
 
 # Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/pub_joint_trajectory_test.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/pub_joint_trajectory_test.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/pub_joint_trajectory_test.dir/rule
 
 # Convenience name for target.
-visualization_msgs_generate_messages_lisp: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
+pub_joint_trajectory_test: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/pub_joint_trajectory_test.dir/rule
 
-.PHONY : visualization_msgs_generate_messages_lisp
+.PHONY : pub_joint_trajectory_test
 
 # fast build rule for target.
-visualization_msgs_generate_messages_lisp/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build
-.PHONY : visualization_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu.dir/rule
-
-# Convenience name for target.
-gazebo_ros_imu: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu.dir/rule
-
-.PHONY : gazebo_ros_imu
-
-# fast build rule for target.
-gazebo_ros_imu/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu.dir/build
-.PHONY : gazebo_ros_imu/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/_run_tests_gazebo_plugins.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/_run_tests_gazebo_plugins.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/_run_tests_gazebo_plugins.dir/rule
-
-# Convenience name for target.
-_run_tests_gazebo_plugins: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/_run_tests_gazebo_plugins.dir/rule
-
-.PHONY : _run_tests_gazebo_plugins
-
-# fast build rule for target.
-_run_tests_gazebo_plugins/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/_run_tests_gazebo_plugins.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/_run_tests_gazebo_plugins.dir/build
-.PHONY : _run_tests_gazebo_plugins/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-diagnostic_msgs_generate_messages_cpp: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : diagnostic_msgs_generate_messages_cpp
-
-# fast build rule for target.
-diagnostic_msgs_generate_messages_cpp/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/build
-.PHONY : diagnostic_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_gpu_laser.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_gpu_laser.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_gpu_laser.dir/rule
-
-# Convenience name for target.
-gazebo_ros_gpu_laser: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_gpu_laser.dir/rule
-
-.PHONY : gazebo_ros_gpu_laser
-
-# fast build rule for target.
-gazebo_ros_gpu_laser/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_gpu_laser.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_gpu_laser.dir/build
-.PHONY : gazebo_ros_gpu_laser/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-diagnostic_msgs_generate_messages_lisp: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : diagnostic_msgs_generate_messages_lisp
-
-# fast build rule for target.
-diagnostic_msgs_generate_messages_lisp/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/build
-.PHONY : diagnostic_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-nav_msgs_generate_messages_eus: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
-
-.PHONY : nav_msgs_generate_messages_eus
-
-# fast build rule for target.
-nav_msgs_generate_messages_eus/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
-.PHONY : nav_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_multicamera.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_multicamera.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_multicamera.dir/rule
-
-# Convenience name for target.
-gazebo_ros_multicamera: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_multicamera.dir/rule
-
-.PHONY : gazebo_ros_multicamera
-
-# fast build rule for target.
-gazebo_ros_multicamera/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_multicamera.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_multicamera.dir/build
-.PHONY : gazebo_ros_multicamera/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_py.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_py.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_py.dir/rule
-
-# Convenience name for target.
-polled_camera_generate_messages_py: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_py.dir/rule
-
-.PHONY : polled_camera_generate_messages_py
-
-# fast build rule for target.
-polled_camera_generate_messages_py/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_py.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_py.dir/build
-.PHONY : polled_camera_generate_messages_py/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_py.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-nav_msgs_generate_messages_py: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-
-.PHONY : nav_msgs_generate_messages_py
-
-# fast build rule for target.
-nav_msgs_generate_messages_py/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_py.dir/build
-.PHONY : nav_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_lisp.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_lisp.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-polled_camera_generate_messages_lisp: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_lisp.dir/rule
-
-.PHONY : polled_camera_generate_messages_lisp
-
-# fast build rule for target.
-polled_camera_generate_messages_lisp/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_lisp.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_lisp.dir/build
-.PHONY : polled_camera_generate_messages_lisp/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-visualization_msgs_generate_messages_py: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
-
-.PHONY : visualization_msgs_generate_messages_py
-
-# fast build rule for target.
-visualization_msgs_generate_messages_py/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_py.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_py.dir/build
-.PHONY : visualization_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_eus.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_eus.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-polled_camera_generate_messages_eus: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_eus.dir/rule
-
-.PHONY : polled_camera_generate_messages_eus
-
-# fast build rule for target.
-polled_camera_generate_messages_eus/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_eus.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_eus.dir/build
-.PHONY : polled_camera_generate_messages_eus/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_block_laser.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_block_laser.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_block_laser.dir/rule
-
-# Convenience name for target.
-gazebo_ros_block_laser: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_block_laser.dir/rule
-
-.PHONY : gazebo_ros_block_laser
-
-# fast build rule for target.
-gazebo_ros_block_laser/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_block_laser.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_block_laser.dir/build
-.PHONY : gazebo_ros_block_laser/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-nodelet_generate_messages_nodejs: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule
-
-.PHONY : nodelet_generate_messages_nodejs
-
-# fast build rule for target.
-nodelet_generate_messages_nodejs/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_nodejs.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_nodejs.dir/build
-.PHONY : nodelet_generate_messages_nodejs/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/bond_generate_messages_nodejs.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/bond_generate_messages_nodejs.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/bond_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-bond_generate_messages_nodejs: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/bond_generate_messages_nodejs.dir/rule
-
-.PHONY : bond_generate_messages_nodejs
-
-# fast build rule for target.
-bond_generate_messages_nodejs/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/bond_generate_messages_nodejs.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/bond_generate_messages_nodejs.dir/build
-.PHONY : bond_generate_messages_nodejs/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-visualization_msgs_generate_messages_cpp: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : visualization_msgs_generate_messages_cpp
-
-# fast build rule for target.
-visualization_msgs_generate_messages_cpp/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build
-.PHONY : visualization_msgs_generate_messages_cpp/fast
+pub_joint_trajectory_test/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/pub_joint_trajectory_test.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/pub_joint_trajectory_test.dir/build
+.PHONY : pub_joint_trajectory_test/fast
 
 # Convenience name for target.
 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/bond_generate_messages_py.dir/rule:
@@ -783,21 +438,6 @@ polled_camera_generate_messages_cpp/fast:
 .PHONY : polled_camera_generate_messages_cpp/fast
 
 # Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/pub_joint_trajectory_test.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/pub_joint_trajectory_test.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/pub_joint_trajectory_test.dir/rule
-
-# Convenience name for target.
-pub_joint_trajectory_test: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/pub_joint_trajectory_test.dir/rule
-
-.PHONY : pub_joint_trajectory_test
-
-# fast build rule for target.
-pub_joint_trajectory_test/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/pub_joint_trajectory_test.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/pub_joint_trajectory_test.dir/build
-.PHONY : pub_joint_trajectory_test/fast
-
-# Convenience name for target.
 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_joint_state_publisher.dir/rule:
 	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_joint_state_publisher.dir/rule
 .PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_joint_state_publisher.dir/rule
@@ -813,19 +453,199 @@ gazebo_ros_joint_state_publisher/fast:
 .PHONY : gazebo_ros_joint_state_publisher/fast
 
 # Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/_run_tests_gazebo_plugins.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/_run_tests_gazebo_plugins.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/_run_tests_gazebo_plugins.dir/rule
 
 # Convenience name for target.
-visualization_msgs_generate_messages_nodejs: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
+_run_tests_gazebo_plugins: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/_run_tests_gazebo_plugins.dir/rule
 
-.PHONY : visualization_msgs_generate_messages_nodejs
+.PHONY : _run_tests_gazebo_plugins
 
 # fast build rule for target.
-visualization_msgs_generate_messages_nodejs/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build
-.PHONY : visualization_msgs_generate_messages_nodejs/fast
+_run_tests_gazebo_plugins/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/_run_tests_gazebo_plugins.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/_run_tests_gazebo_plugins.dir/build
+.PHONY : _run_tests_gazebo_plugins/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+diagnostic_msgs_generate_messages_cpp: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : diagnostic_msgs_generate_messages_cpp
+
+# fast build rule for target.
+diagnostic_msgs_generate_messages_cpp/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/build
+.PHONY : diagnostic_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_joint_pose_trajectory.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_joint_pose_trajectory.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_joint_pose_trajectory.dir/rule
+
+# Convenience name for target.
+gazebo_ros_joint_pose_trajectory: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_joint_pose_trajectory.dir/rule
+
+.PHONY : gazebo_ros_joint_pose_trajectory
+
+# fast build rule for target.
+gazebo_ros_joint_pose_trajectory/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_joint_pose_trajectory.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_joint_pose_trajectory.dir/build
+.PHONY : gazebo_ros_joint_pose_trajectory/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_gpu_laser.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_gpu_laser.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_gpu_laser.dir/rule
+
+# Convenience name for target.
+gazebo_ros_gpu_laser: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_gpu_laser.dir/rule
+
+.PHONY : gazebo_ros_gpu_laser
+
+# fast build rule for target.
+gazebo_ros_gpu_laser/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_gpu_laser.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_gpu_laser.dir/build
+.PHONY : gazebo_ros_gpu_laser/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+diagnostic_msgs_generate_messages_lisp: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : diagnostic_msgs_generate_messages_lisp
+
+# fast build rule for target.
+diagnostic_msgs_generate_messages_lisp/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/build
+.PHONY : diagnostic_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_multicamera.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_multicamera.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_multicamera.dir/rule
+
+# Convenience name for target.
+gazebo_ros_multicamera: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_multicamera.dir/rule
+
+.PHONY : gazebo_ros_multicamera
+
+# fast build rule for target.
+gazebo_ros_multicamera/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_multicamera.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_multicamera.dir/build
+.PHONY : gazebo_ros_multicamera/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_py.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_py.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_py.dir/rule
+
+# Convenience name for target.
+polled_camera_generate_messages_py: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_py.dir/rule
+
+.PHONY : polled_camera_generate_messages_py
+
+# fast build rule for target.
+polled_camera_generate_messages_py/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_py.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_py.dir/build
+.PHONY : polled_camera_generate_messages_py/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+nodelet_generate_messages_nodejs: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule
+
+.PHONY : nodelet_generate_messages_nodejs
+
+# fast build rule for target.
+nodelet_generate_messages_nodejs/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_nodejs.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_nodejs.dir/build
+.PHONY : nodelet_generate_messages_nodejs/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/bond_generate_messages_nodejs.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/bond_generate_messages_nodejs.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/bond_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+bond_generate_messages_nodejs: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/bond_generate_messages_nodejs.dir/rule
+
+.PHONY : bond_generate_messages_nodejs
+
+# fast build rule for target.
+bond_generate_messages_nodejs/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/bond_generate_messages_nodejs.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/bond_generate_messages_nodejs.dir/build
+.PHONY : bond_generate_messages_nodejs/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/hokuyo_node.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/hokuyo_node.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/hokuyo_node.dir/rule
+
+# Convenience name for target.
+hokuyo_node: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/hokuyo_node.dir/rule
+
+.PHONY : hokuyo_node
+
+# fast build rule for target.
+hokuyo_node/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/hokuyo_node.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/hokuyo_node.dir/build
+.PHONY : hokuyo_node/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_tricycle_drive.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_tricycle_drive.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_tricycle_drive.dir/rule
+
+# Convenience name for target.
+gazebo_ros_tricycle_drive: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_tricycle_drive.dir/rule
+
+.PHONY : gazebo_ros_tricycle_drive
+
+# fast build rule for target.
+gazebo_ros_tricycle_drive/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_tricycle_drive.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_tricycle_drive.dir/build
+.PHONY : gazebo_ros_tricycle_drive/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+diagnostic_msgs_generate_messages_py: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/rule
+
+.PHONY : diagnostic_msgs_generate_messages_py
+
+# fast build rule for target.
+diagnostic_msgs_generate_messages_py/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/build
+.PHONY : diagnostic_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/camera_synchronizer.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/camera_synchronizer.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/camera_synchronizer.dir/rule
+
+# Convenience name for target.
+camera_synchronizer: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/camera_synchronizer.dir/rule
+
+.PHONY : camera_synchronizer
+
+# fast build rule for target.
+camera_synchronizer/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/camera_synchronizer.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/camera_synchronizer.dir/build
+.PHONY : camera_synchronizer/fast
 
 # Convenience name for target.
 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_eus.dir/rule:
@@ -841,6 +661,21 @@ nodelet_generate_messages_eus: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet
 nodelet_generate_messages_eus/fast:
 	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_eus.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_eus.dir/build
 .PHONY : nodelet_generate_messages_eus/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_camera.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_camera.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_camera.dir/rule
+
+# Convenience name for target.
+gazebo_ros_camera: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_camera.dir/rule
+
+.PHONY : gazebo_ros_camera
+
+# fast build rule for target.
+gazebo_ros_camera/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_camera.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_camera.dir/build
+.PHONY : gazebo_ros_camera/fast
 
 # Convenience name for target.
 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_nodejs.dir/rule:
@@ -886,6 +721,51 @@ gazebo_plugins_gencfg: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_plugins_
 gazebo_plugins_gencfg/fast:
 	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_plugins_gencfg.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_plugins_gencfg.dir/build
 .PHONY : gazebo_plugins_gencfg/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_lisp.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_lisp.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+polled_camera_generate_messages_lisp: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_lisp.dir/rule
+
+.PHONY : polled_camera_generate_messages_lisp
+
+# fast build rule for target.
+polled_camera_generate_messages_lisp/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_lisp.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_lisp.dir/build
+.PHONY : polled_camera_generate_messages_lisp/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+diagnostic_msgs_generate_messages_eus: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/rule
+
+.PHONY : diagnostic_msgs_generate_messages_eus
+
+# fast build rule for target.
+diagnostic_msgs_generate_messages_eus/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/build
+.PHONY : diagnostic_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_planar_move.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_planar_move.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_planar_move.dir/rule
+
+# Convenience name for target.
+gazebo_ros_planar_move: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_planar_move.dir/rule
+
+.PHONY : gazebo_ros_planar_move
+
+# fast build rule for target.
+gazebo_ros_planar_move/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_planar_move.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_planar_move.dir/build
+.PHONY : gazebo_ros_planar_move/fast
 
 # Convenience name for target.
 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/bond_generate_messages_eus.dir/rule:
@@ -978,51 +858,6 @@ gazebo_ros_depth_camera/fast:
 .PHONY : gazebo_ros_depth_camera/fast
 
 # Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_tricycle_drive.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_tricycle_drive.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_tricycle_drive.dir/rule
-
-# Convenience name for target.
-gazebo_ros_tricycle_drive: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_tricycle_drive.dir/rule
-
-.PHONY : gazebo_ros_tricycle_drive
-
-# fast build rule for target.
-gazebo_ros_tricycle_drive/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_tricycle_drive.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_tricycle_drive.dir/build
-.PHONY : gazebo_ros_tricycle_drive/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-nav_msgs_generate_messages_lisp: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : nav_msgs_generate_messages_lisp
-
-# fast build rule for target.
-nav_msgs_generate_messages_lisp/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build
-.PHONY : nav_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/hokuyo_node.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/hokuyo_node.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/hokuyo_node.dir/rule
-
-# Convenience name for target.
-hokuyo_node: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/hokuyo_node.dir/rule
-
-.PHONY : hokuyo_node
-
-# fast build rule for target.
-hokuyo_node/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/hokuyo_node.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/hokuyo_node.dir/build
-.PHONY : hokuyo_node/fast
-
-# Convenience name for target.
 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_utils.dir/rule:
 	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_utils.dir/rule
 .PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_utils.dir/rule
@@ -1036,81 +871,6 @@ gazebo_ros_utils: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_utils.dir
 gazebo_ros_utils/fast:
 	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_utils.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_utils.dir/build
 .PHONY : gazebo_ros_utils/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/vision_reconfigure.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/vision_reconfigure.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/vision_reconfigure.dir/rule
-
-# Convenience name for target.
-vision_reconfigure: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/vision_reconfigure.dir/rule
-
-.PHONY : vision_reconfigure
-
-# fast build rule for target.
-vision_reconfigure/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/vision_reconfigure.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/vision_reconfigure.dir/build
-.PHONY : vision_reconfigure/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-diagnostic_msgs_generate_messages_py: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/rule
-
-.PHONY : diagnostic_msgs_generate_messages_py
-
-# fast build rule for target.
-diagnostic_msgs_generate_messages_py/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/build
-.PHONY : diagnostic_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-nav_msgs_generate_messages_nodejs: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : nav_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-nav_msgs_generate_messages_nodejs/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build
-.PHONY : nav_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/camera_synchronizer.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/camera_synchronizer.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/camera_synchronizer.dir/rule
-
-# Convenience name for target.
-camera_synchronizer: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/camera_synchronizer.dir/rule
-
-.PHONY : camera_synchronizer
-
-# fast build rule for target.
-camera_synchronizer/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/camera_synchronizer.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/camera_synchronizer.dir/build
-.PHONY : camera_synchronizer/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu_sensor.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu_sensor.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu_sensor.dir/rule
-
-# Convenience name for target.
-gazebo_ros_imu_sensor: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu_sensor.dir/rule
-
-.PHONY : gazebo_ros_imu_sensor
-
-# fast build rule for target.
-gazebo_ros_imu_sensor/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu_sensor.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu_sensor.dir/build
-.PHONY : gazebo_ros_imu_sensor/fast
 
 # Convenience name for target.
 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/MultiCameraPlugin.dir/rule:
@@ -1128,19 +888,49 @@ MultiCameraPlugin/fast:
 .PHONY : MultiCameraPlugin/fast
 
 # Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_camera.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_camera.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_camera.dir/rule
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu_sensor.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu_sensor.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu_sensor.dir/rule
 
 # Convenience name for target.
-gazebo_ros_camera: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_camera.dir/rule
+gazebo_ros_imu_sensor: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu_sensor.dir/rule
 
-.PHONY : gazebo_ros_camera
+.PHONY : gazebo_ros_imu_sensor
 
 # fast build rule for target.
-gazebo_ros_camera/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_camera.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_camera.dir/build
-.PHONY : gazebo_ros_camera/fast
+gazebo_ros_imu_sensor/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu_sensor.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu_sensor.dir/build
+.PHONY : gazebo_ros_imu_sensor/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_eus.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_eus.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+polled_camera_generate_messages_eus: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_eus.dir/rule
+
+.PHONY : polled_camera_generate_messages_eus
+
+# fast build rule for target.
+polled_camera_generate_messages_eus/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_eus.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/polled_camera_generate_messages_eus.dir/build
+.PHONY : polled_camera_generate_messages_eus/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_block_laser.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_block_laser.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_block_laser.dir/rule
+
+# Convenience name for target.
+gazebo_ros_block_laser: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_block_laser.dir/rule
+
+.PHONY : gazebo_ros_block_laser
+
+# fast build rule for target.
+gazebo_ros_block_laser/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_block_laser.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_block_laser.dir/build
+.PHONY : gazebo_ros_block_laser/fast
 
 # Convenience name for target.
 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/run_tests_gazebo_plugins_rostest_test_block_laser_clipping.test.dir/rule:
@@ -1233,19 +1023,19 @@ gazebo_ros_projector/fast:
 .PHONY : gazebo_ros_projector/fast
 
 # Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_vacuum_gripper.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_vacuum_gripper.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_vacuum_gripper.dir/rule
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_wheel_slip.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_wheel_slip.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_wheel_slip.dir/rule
 
 # Convenience name for target.
-gazebo_ros_vacuum_gripper: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_vacuum_gripper.dir/rule
+gazebo_ros_wheel_slip: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_wheel_slip.dir/rule
 
-.PHONY : gazebo_ros_vacuum_gripper
+.PHONY : gazebo_ros_wheel_slip
 
 # fast build rule for target.
-gazebo_ros_vacuum_gripper/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_vacuum_gripper.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_vacuum_gripper.dir/build
-.PHONY : gazebo_ros_vacuum_gripper/fast
+gazebo_ros_wheel_slip/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_wheel_slip.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_wheel_slip.dir/build
+.PHONY : gazebo_ros_wheel_slip/fast
 
 # Convenience name for target.
 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_openni_kinect.dir/rule:
@@ -1263,19 +1053,19 @@ gazebo_ros_openni_kinect/fast:
 .PHONY : gazebo_ros_openni_kinect/fast
 
 # Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_wheel_slip.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_wheel_slip.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_wheel_slip.dir/rule
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_vacuum_gripper.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_vacuum_gripper.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_vacuum_gripper.dir/rule
 
 # Convenience name for target.
-gazebo_ros_wheel_slip: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_wheel_slip.dir/rule
+gazebo_ros_vacuum_gripper: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_vacuum_gripper.dir/rule
 
-.PHONY : gazebo_ros_wheel_slip
+.PHONY : gazebo_ros_vacuum_gripper
 
 # fast build rule for target.
-gazebo_ros_wheel_slip/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_wheel_slip.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_wheel_slip.dir/build
-.PHONY : gazebo_ros_wheel_slip/fast
+gazebo_ros_vacuum_gripper/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_vacuum_gripper.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_vacuum_gripper.dir/build
+.PHONY : gazebo_ros_vacuum_gripper/fast
 
 # Convenience name for target.
 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_laser.dir/rule:
@@ -1293,6 +1083,36 @@ gazebo_ros_laser/fast:
 .PHONY : gazebo_ros_laser/fast
 
 # Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_skid_steer_drive.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_skid_steer_drive.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_skid_steer_drive.dir/rule
+
+# Convenience name for target.
+gazebo_ros_skid_steer_drive: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_skid_steer_drive.dir/rule
+
+.PHONY : gazebo_ros_skid_steer_drive
+
+# fast build rule for target.
+gazebo_ros_skid_steer_drive/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_skid_steer_drive.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_skid_steer_drive.dir/build
+.PHONY : gazebo_ros_skid_steer_drive/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_video.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_video.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_video.dir/rule
+
+# Convenience name for target.
+gazebo_ros_video: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_video.dir/rule
+
+.PHONY : gazebo_ros_video
+
+# fast build rule for target.
+gazebo_ros_video/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_video.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_video.dir/build
+.PHONY : gazebo_ros_video/fast
+
+# Convenience name for target.
 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_p3d.dir/rule:
 	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_p3d.dir/rule
 .PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_p3d.dir/rule
@@ -1306,6 +1126,21 @@ gazebo_ros_p3d: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_p3d.dir/rul
 gazebo_ros_p3d/fast:
 	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_p3d.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_p3d.dir/build
 .PHONY : gazebo_ros_p3d/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu.dir/rule
+
+# Convenience name for target.
+gazebo_ros_imu: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu.dir/rule
+
+.PHONY : gazebo_ros_imu
+
+# fast build rule for target.
+gazebo_ros_imu/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_imu.dir/build
+.PHONY : gazebo_ros_imu/fast
 
 # Convenience name for target.
 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nodelet_generate_messages_cpp.dir/rule:
@@ -1338,36 +1173,6 @@ gazebo_ros_f3d/fast:
 .PHONY : gazebo_ros_f3d/fast
 
 # Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-visualization_msgs_generate_messages_eus: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
-
-.PHONY : visualization_msgs_generate_messages_eus
-
-# fast build rule for target.
-visualization_msgs_generate_messages_eus/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build
-.PHONY : visualization_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
-.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-nav_msgs_generate_messages_cpp: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : nav_msgs_generate_messages_cpp
-
-# fast build rule for target.
-nav_msgs_generate_messages_cpp/fast:
-	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build
-.PHONY : nav_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_prosilica.dir/rule:
 	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_prosilica.dir/rule
 .PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_prosilica.dir/rule
@@ -1396,6 +1201,51 @@ gazebo_ros_force: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_force.dir
 gazebo_ros_force/fast:
 	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_force.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_force.dir/build
 .PHONY : gazebo_ros_force/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_ft_sensor.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_ft_sensor.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_ft_sensor.dir/rule
+
+# Convenience name for target.
+gazebo_ros_ft_sensor: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_ft_sensor.dir/rule
+
+.PHONY : gazebo_ros_ft_sensor
+
+# fast build rule for target.
+gazebo_ros_ft_sensor/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_ft_sensor.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_ft_sensor.dir/build
+.PHONY : gazebo_ros_ft_sensor/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_diff_drive.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_diff_drive.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_diff_drive.dir/rule
+
+# Convenience name for target.
+gazebo_ros_diff_drive: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_diff_drive.dir/rule
+
+.PHONY : gazebo_ros_diff_drive
+
+# fast build rule for target.
+gazebo_ros_diff_drive/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_diff_drive.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_diff_drive.dir/build
+.PHONY : gazebo_ros_diff_drive/fast
+
+# Convenience name for target.
+gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_range.dir/rule:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_range.dir/rule
+.PHONY : gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_range.dir/rule
+
+# Convenience name for target.
+gazebo_ros_range: gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_range.dir/rule
+
+.PHONY : gazebo_ros_range
+
+# fast build rule for target.
+gazebo_ros_range/fast:
+	cd /home/duong/catkin_ws/build && $(MAKE) -f gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_range.dir/build.make gazebo_ros_pkgs/gazebo_plugins/CMakeFiles/gazebo_ros_range.dir/build
+.PHONY : gazebo_ros_range/fast
 
 src/MultiCameraPlugin.o: src/MultiCameraPlugin.cpp.o
 
@@ -2484,6 +2334,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
+	@echo "... install/local"
 	@echo "... install"
 	@echo "... _run_tests_gazebo_plugins_rostest_test_block_laser_clipping.test"
 	@echo "... run_tests_gazebo_plugins_rostest_test_range_range_plugin.test"
@@ -2494,84 +2345,73 @@ help:
 	@echo "... run_tests_gazebo_plugins_rostest"
 	@echo "... set_model_state-test"
 	@echo "... gazebo_ros_template"
-	@echo "... gazebo_ros_range"
-	@echo "... gazebo_ros_video"
-	@echo "... gazebo_ros_skid_steer_drive"
-	@echo "... edit_cache"
-	@echo "... gazebo_ros_ft_sensor"
-	@echo "... gazebo_ros_diff_drive"
-	@echo "... gazebo_ros_joint_pose_trajectory"
+	@echo "... vision_reconfigure"
 	@echo "... run_tests_gazebo_plugins"
 	@echo "... diagnostic_msgs_generate_messages_nodejs"
-	@echo "... gazebo_ros_planar_move"
-	@echo "... diagnostic_msgs_generate_messages_eus"
 	@echo "... gazebo_ros_harness"
 	@echo "... test"
 	@echo "... gazebo_ros_bumper"
-	@echo "... visualization_msgs_generate_messages_lisp"
-	@echo "... gazebo_ros_imu"
-	@echo "... _run_tests_gazebo_plugins"
-	@echo "... diagnostic_msgs_generate_messages_cpp"
-	@echo "... gazebo_ros_gpu_laser"
-	@echo "... diagnostic_msgs_generate_messages_lisp"
-	@echo "... install/local"
-	@echo "... nav_msgs_generate_messages_eus"
-	@echo "... gazebo_ros_multicamera"
-	@echo "... polled_camera_generate_messages_py"
-	@echo "... nav_msgs_generate_messages_py"
-	@echo "... polled_camera_generate_messages_lisp"
-	@echo "... visualization_msgs_generate_messages_py"
-	@echo "... polled_camera_generate_messages_eus"
-	@echo "... gazebo_ros_block_laser"
-	@echo "... nodelet_generate_messages_nodejs"
-	@echo "... bond_generate_messages_nodejs"
-	@echo "... visualization_msgs_generate_messages_cpp"
+	@echo "... pub_joint_trajectory_test"
 	@echo "... bond_generate_messages_py"
 	@echo "... _run_tests_gazebo_plugins_rostest_test_range_range_plugin.test"
 	@echo "... polled_camera_generate_messages_cpp"
-	@echo "... pub_joint_trajectory_test"
 	@echo "... gazebo_ros_joint_state_publisher"
-	@echo "... visualization_msgs_generate_messages_nodejs"
+	@echo "... _run_tests_gazebo_plugins"
+	@echo "... diagnostic_msgs_generate_messages_cpp"
+	@echo "... gazebo_ros_joint_pose_trajectory"
+	@echo "... gazebo_ros_gpu_laser"
+	@echo "... diagnostic_msgs_generate_messages_lisp"
+	@echo "... gazebo_ros_multicamera"
+	@echo "... polled_camera_generate_messages_py"
+	@echo "... nodelet_generate_messages_nodejs"
+	@echo "... bond_generate_messages_nodejs"
+	@echo "... hokuyo_node"
+	@echo "... gazebo_ros_tricycle_drive"
+	@echo "... diagnostic_msgs_generate_messages_py"
+	@echo "... camera_synchronizer"
 	@echo "... nodelet_generate_messages_eus"
+	@echo "... gazebo_ros_camera"
 	@echo "... polled_camera_generate_messages_nodejs"
 	@echo "... nodelet_generate_messages_lisp"
 	@echo "... gazebo_plugins_gencfg"
+	@echo "... polled_camera_generate_messages_lisp"
+	@echo "... diagnostic_msgs_generate_messages_eus"
+	@echo "... gazebo_ros_planar_move"
 	@echo "... bond_generate_messages_eus"
 	@echo "... bond_generate_messages_cpp"
 	@echo "... nodelet_generate_messages_py"
 	@echo "... bond_generate_messages_lisp"
 	@echo "... gazebo_ros_triggered_multicamera"
 	@echo "... gazebo_ros_depth_camera"
-	@echo "... gazebo_ros_tricycle_drive"
-	@echo "... nav_msgs_generate_messages_lisp"
-	@echo "... hokuyo_node"
 	@echo "... gazebo_ros_utils"
-	@echo "... vision_reconfigure"
-	@echo "... diagnostic_msgs_generate_messages_py"
-	@echo "... nav_msgs_generate_messages_nodejs"
-	@echo "... camera_synchronizer"
-	@echo "... gazebo_ros_imu_sensor"
 	@echo "... MultiCameraPlugin"
-	@echo "... gazebo_ros_camera"
+	@echo "... gazebo_ros_imu_sensor"
+	@echo "... polled_camera_generate_messages_eus"
+	@echo "... gazebo_ros_block_laser"
 	@echo "... run_tests_gazebo_plugins_rostest_test_block_laser_clipping.test"
 	@echo "... gazebo_ros_camera_utils"
 	@echo "... gazebo_ros_triggered_camera"
 	@echo "... gazebo_ros_hand_of_god"
 	@echo "... gazebo_ros_elevator"
 	@echo "... gazebo_ros_projector"
-	@echo "... gazebo_ros_vacuum_gripper"
-	@echo "... gazebo_ros_openni_kinect"
 	@echo "... rebuild_cache"
 	@echo "... gazebo_ros_wheel_slip"
+	@echo "... gazebo_ros_openni_kinect"
+	@echo "... gazebo_ros_vacuum_gripper"
 	@echo "... list_install_components"
 	@echo "... gazebo_ros_laser"
+	@echo "... gazebo_ros_skid_steer_drive"
+	@echo "... gazebo_ros_video"
 	@echo "... gazebo_ros_p3d"
+	@echo "... gazebo_ros_imu"
 	@echo "... nodelet_generate_messages_cpp"
 	@echo "... gazebo_ros_f3d"
-	@echo "... visualization_msgs_generate_messages_eus"
-	@echo "... nav_msgs_generate_messages_cpp"
 	@echo "... gazebo_ros_prosilica"
 	@echo "... gazebo_ros_force"
+	@echo "... edit_cache"
+	@echo "... gazebo_ros_ft_sensor"
+	@echo "... gazebo_ros_diff_drive"
+	@echo "... gazebo_ros_range"
 	@echo "... src/MultiCameraPlugin.o"
 	@echo "... src/MultiCameraPlugin.i"
 	@echo "... src/MultiCameraPlugin.s"

@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
 <launch>
 
-    <param name="robot_description" command="$(find xacro)/xacro '$(find mobile_manipulator_body)/urdf/robot_base.urdf.xacro'"/>
-
+    <!-- <param name="robot_description" command="$(find xacro)/xacro '$(find mobile_manipulator_body)/urdf/robot_base.urdf.xacro'"/> -->
+<param
+    name="robot_description"
+    command="$(find xacro)/xacro '$(find mobile_manipulator_body)/urdf/tb_sim.urdf.xacro'" />
     <!-- <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
         <param name="use_gui" value="False"/>
     </node> -->

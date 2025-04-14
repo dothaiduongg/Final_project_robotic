@@ -53,9 +53,7 @@ def close_connection(exception):
 def create_table():
    
     subprocess.Popen(["roslaunch", "turtlebot3_navigation", "turtlebot3_bringup.launch"])
-    
-
-    with app.app_context():
+	with app.app_context():
 		try:
 			c = get_db().cursor()
 			c.execute("CREATE TABLE IF NOT EXISTS maps (id integer PRIMARY KEY,name text NOT NULL)")

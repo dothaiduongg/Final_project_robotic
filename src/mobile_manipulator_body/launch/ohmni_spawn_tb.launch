@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- TODO solving robot namespace to add multiple robot -->
+  <arg name="robot_ns" default="tb_sim1"/>
+  <arg name="verbose" value="true" />
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.0"/>
+  <arg name="yaw" default="0.0"/>
+  <arg name="enable_rviz" default="true"/>
+
+  <param
+    name="robot_description"
+    command="$(find xacro)/xacro '$(find mobile_manipulator_body)/urdf/tb_sim.urdf.xacro'" />
+  <node
+    name="spawn_model"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    output="screen"
+    args="-urdf
+          -param robot_description
+          -model tb_sim
+          -x $(arg x)
+          -y $(arg y)
+          -z $(arg z)
+          -Y $(arg yaw)"/>
+  <node
+    name="joint_state_publisher"
+    pkg="joint_state_publisher"
+    type="joint_state_publisher" />
+  <node
+    name="robot_state_publisher"
+    pkg="robot_state_publisher"
+    type="robot_state_publisher" />
+
+  <group if="$(arg enable_rviz)" >
+    <node
+      name="rviz"
+      pkg="rviz"
+      type="rviz"
+      args="-d $(find mobile_manipulator_body)/rviz/ohmni_gazebo.rviz" />
+   </group>
+
+  <node 
+    pkg="robot_pose_publisher" 
+    type="robot_pose_publisher" 
+    name="robot_pose_publisher" />
+  <node 
+    pkg="tf2_web_republisher" 
+    type="tf2_web_republisher" 
+    name="tf2_web_republisher"/>
+</launch>

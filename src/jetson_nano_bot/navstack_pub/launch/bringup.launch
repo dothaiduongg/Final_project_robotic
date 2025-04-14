@@ -1,24 +1,34 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="open_rviz" default="false"/>
-  <arg name="move_forward_only" default="false"/>
-    <include file="$(find gazebo_ros)/launch/empty_world.launch">
-      <arg name="world_name" value="$(find navstack_pub)/world/nhakho1.world"/>
-      <arg name="paused" value="false"/>
-      <arg name="use_sim_time" value="true"/>
-      <arg name="gui" value="true"/>
-      <arg name="recording" value="false"/>
-      <arg name="debug" value="false"/>
-    </include>
-    <param name="robot_description" command="$(find xacro)/xacro '$(find mobile_manipulator_body)/urdf/robot_base.urdf.xacro'"/>
-    <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"  args="-urdf -model robot_base -param robot_description"  />
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" > </node>
-    <!-- Turtlebot3 -->
-    <!-- rviz -->
-    <group if="$(arg open_rviz)">
-      <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find navstack_pub)/rviz/nav_stack.rviz"/>
+  <arg name="open_rviz" default="true"/>
+  <!-- <arg name="move_forward_only" default="false"/> -->
+  <arg name="x_pos" default="0.0"/>
+  <arg name="y_pos" default="0.0"/>
+  <arg name="z_pos" default="0.3"/>
+  <arg name="yaw" default="0.0"/>
+  <arg name="map_file" default="$(find navstack_pub)/maps/my_map_lab.yaml"/>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!-- <arg name="world_name" value="$(find navstack_pub)/world/nhakho1.world"/> -->
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="recording" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" output="screen"></node>
+  <param name="robot_description" command="$(find xacro)/xacro '$(find mobile_manipulator_body)/urdf/tb_sim.urdf.xacro'"/>
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"  args="-urdf -model tb_sim -param robot_description -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -Y $(arg yaw)"  />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" > </node>
+  <!-- Turtlebot3 -->
+  <!-- rviz -->
+  <param name="spawn_delay" value="5.0"/>
+  <group if="$(arg open_rviz)">
+      <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find navstack_pub)/rviz/config.rviz"/>
     </group>
-    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />
-    <node pkg="robot_pose_publisher" type="robot_pose_publisher" name="robot_pose_publisher" />
-    <node pkg="tf2_web_republisher" type="tf2_web_republisher" name="tf2_web_republisher"/>
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node pkg="robot_pose_publisher" type="robot_pose_publisher" name="robot_pose_publisher" />
+  <node pkg="tf2_web_republisher" type="tf2_web_republisher" name="tf2_web_republisher"/>
+  <node pkg="tf2_ros" type="static_transform_publisher" name="fake_map"
+    args="0.0 0.0  0.0 0 0 0 map odom" />
 </launch>

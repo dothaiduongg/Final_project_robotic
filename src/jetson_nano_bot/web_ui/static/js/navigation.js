@@ -1,10 +1,10 @@
+const { localIP } = require('./get_ip_add.js');
 var navigation = false;
 var pathed = false;
 var homing = false;
 var MAP_WIDTH = (window.innerWidth)*0.65;
 var MAP_HEIGHT = window.innerHeight - (window.innerHeight)*0.08;
 var value =    document.cookie;
-
 
 
 $("#drop-text").change(function() {
@@ -68,7 +68,7 @@ $(document).ready(function() {
 
 
     var ros = new ROSLIB.Ros({
-        url: 'ws://localhost:9090'
+        url: `ws://${localIP}:9090`
     });
 
 
@@ -157,7 +157,7 @@ $(document).ready(function() {
         window.homing = false;
     });
 
-    $('#path').change(function() {
+    $('#path').change(function(event) {
         event.preventDefault();
         if (this.checked) {
             pathed();

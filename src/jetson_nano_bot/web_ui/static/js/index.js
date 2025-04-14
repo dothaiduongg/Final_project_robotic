@@ -1,3 +1,5 @@
+const { localIP } = require('./get_ip_add.js');
+// console.log(`Server running at http://${localIP}:3000`);
 $(document).ready(function () {
 
     $body = $("body");
@@ -6,17 +8,15 @@ $(document).ready(function () {
         $body.addClass("loading");
         $.ajax({
             url: '/navigation/index',
-            type: 'POST',
+            type: 'GET',
             success: function (response) {
                 console.log(response);
 
                 function connect() {
 
                     var ros = new ROSLIB.Ros({
-                        url: 'ws://localhost:9090'
+                        url: `ws://${localIP}:9090`
                     });
-
-
 
                     ros.on('connection', function () {
                         console.log('Connected to websocket server.');
@@ -26,9 +26,7 @@ $(document).ready(function () {
                             messageType: 'rosgraph_msgs/Log'
                         });
 
-
                         rosTopic.subscribe(function (message) {
-
                             if (message.msg == "Initialization complete") {
                                 console.log(message.msg)
                                 window.location = "/mapping";
@@ -102,9 +100,19 @@ $(document).ready(function () {
                             function connect() {
 
                                 var ros = new ROSLIB.Ros({
-                                    url: 'ws://localhost:9090'
+                                    url: `ws://${localIP}:9090`
                                 });
-
+                                ros.on('connection', function() {
+                                    console.log('Connected to websocket server.');
+                                });
+                                
+                                ros.on('error', function(error) {
+                                    console.log('Error connecting to websocket server: ', error);
+                                });
+                                
+                                ros.on('close', function() {
+                                    console.log('Connection to websocket server closed.');
+                                });
 
 
                                 ros.on('connection', function () {
@@ -116,9 +124,11 @@ $(document).ready(function () {
                                     });
 
 
+
                                     rosTopic.subscribe(function (message) {
 
                                         if (message.msg == "odom received!") {
+
                                             console.log(message.msg)
                                             window.location = "/navigation";
                                             $body.removeClass("loading");
@@ -169,3 +179,4 @@ $(document).ready(function () {
 
 
 });
+
